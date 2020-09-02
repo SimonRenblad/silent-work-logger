@@ -5,6 +5,10 @@ A silent and simple program for logging the time spent working on a project
 
 Compile .cpp file using C++ compiler of choice. Run .exe file to start logging, and press enter to stop logger.
 
+### WORK IN PROGRESS: ANALYSIS
+
+analysis.py is a separate file for executing and viewing analysis of data recorded by silent-work-logger. Currently under development.
+
 ### Philosophy
 
 Having a discrete and subtle timer running in the background, that does not display how long you have worked at all times, may remove some of the performance anxiety and workaholic tendencies whilst still allowing for a tracking of past performance. This is a minimalist solution to this problem.

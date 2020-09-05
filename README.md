@@ -5,6 +5,8 @@ A silent and simple program for logging the time spent working on a project
 
 Compile .cpp file using C++ compiler of choice. Run .exe file to start logging, and press enter to stop logger.
 
+Run 'python analyser.py' to get information about the data collected. Currently displays time spent daily (as opposed to the recorded time spent per session)
+
 ### WORK IN PROGRESS: ANALYSIS
 
 analysis.py is a separate file for executing and viewing analysis of data recorded by silent-work-logger. Currently under development.

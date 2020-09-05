@@ -42,7 +42,7 @@ def convert_to_numerical(data):
 
         entry['month'] = int(date[1])
 
-        entry['day'] = int(date[2])
+        entry['year'] = int(date[2])
 
         # duration is divided first by h,
         duration = point['duration'].split('h')
@@ -65,10 +65,48 @@ def convert_to_numerical(data):
 
 #TODO:
 
+#dictionary structure:
+# for every entry, 'day' 'month' 'year', 'hours', 'minutes'
 
 # ANALYSIS FUNCTIONS
 def per_day_totals(data):
-    pass
+
+    per_day_data = []
+
+    # iterate over the given data
+    for old_entry in data:
+
+        # switch variable triggered to false if date already exists in output list
+        add = True
+
+        # iterate over output list, checking if date matches existing date
+        for entry in per_day_data:
+
+            # date matching
+            if old_entry['date'] == entry['date']:
+
+                # trigger switch
+                add = False
+
+                # perform addition of times using modulo 60 to carry over minutes to hours
+                # we discard seconds for now, later iterations may also carry over seconds
+                sum_minutes = old_entry['minutes'] + entry['minutes']
+
+                carry_hour = sum_minutes // 60
+
+                remaining_min = sum_minutes % 60
+
+                # record new duration (keep in mind that 'duration' key will now be useless...)
+                entry['hours'] = old_entry['hours'] + carry_hour
+
+                entry['minutes'] = remaining_min
+
+        # date has yet to be added to list, add to output list
+        if add:
+            per_day_data.append(old_entry)
+
+    return per_day_data
+
 
 def per_month_totals(data):
     pass
@@ -77,6 +115,9 @@ def seven_day_average(data):
     pass
 
 def monthly_average(data):
+    pass
+
+def sort_by_date(data):
     pass
 
 # TIME VALIDATION FUNCTIONS
@@ -92,12 +133,32 @@ def get_current_time():
 def validate_usage():
     pass
 
+# PRINTING FUNCTIONS
+
+def show_graph(data):
+    pass
+
+def print_stats(data):
+    for entry in data:
+        print(entry['date'] + ": " + str(entry['hours']) + "h" + str(entry['minutes']) + "m")
 
 
 #start of program
 def analyze():
 
+    # read data from file
     data = read_log()
+
+    # decode strings to get dates and durations in integer values
     data = convert_to_numerical(data)
+
+    # get data summed in days
+    per_day_data = per_day_totals(data)
+
+    # testing
+    print_stats(per_day_data)
+
+analyze()
+
 
 
